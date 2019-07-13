@@ -11,6 +11,10 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * @author anusha
+ */
 public class HelpPage extends BasePage {
 
     public enum HELP_SELECTION {COMMUNITY, HELP_CENTER}

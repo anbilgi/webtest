@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="WebTest Suite" parallel="none">
+    <test name="Test banking licence">
+        <classes>
+            <class name="com.webtest.tests.TestBankLicenceBlogPost"/>
+        </classes>
+    </test>
+    <test name="Test keyboard shorcuts">
+        <classes>
+            <class name="com.webtest.tests.TestKeyboardShortcuts"/>
+        </classes>
+    </test>
+</suite>

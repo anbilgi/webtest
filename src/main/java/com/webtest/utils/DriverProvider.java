@@ -8,14 +8,6 @@ public class DriverProvider {
 
     private static WebDriver driver = null;
 
-    //TODO : https://www.toolsqa.com/selenium-webdriver/how-to-use-geckodriver/
-
-    //TODO :  https://ftp.mozilla.org/pub/firefox/releases/59.0/mac/en-GB/
-
-    //TODO : https://firefox-source-docs.mozilla.org/testing/geckodriver/geckodriver/Support.html
-
-    private static String geckoPath = "/Users/anusha/setup/geckodriver";
-
     private DriverProvider() {
     }
 
@@ -29,7 +21,8 @@ public class DriverProvider {
     private static WebDriver getFireFoxInstance() {
         WebDriver driver = null;
         DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-        System.setProperty("webdriver.gecko.driver", geckoPath);
+        setCapabilities(capabilities);
+        System.setProperty("webdriver.gecko.driver",ConfigParser.getConfig().getGecko_path());
 
         int attempt = 0;
         while (driver == null && attempt++ < 5) {
@@ -37,6 +30,22 @@ public class DriverProvider {
         }
         driver.manage().window().maximize();
         return driver;
+    }
+    
+    private static void setCapabilities(DesiredCapabilities capabilities){
+        capabilities.setCapability("app.update.auto", false);
+        capabilities.setCapability("app.update.enabled", false);
+    }
+
+    public static void CloseAllOtherHandles() {
+        String originalHandle = driver.getWindowHandle();
+        for (String handle : driver.getWindowHandles()) {
+            if (!handle.equals(originalHandle)) {
+                driver.switchTo().window(handle);
+                driver.close();
+            }
+        }
+        driver.switchTo().window(originalHandle);
     }
 
 }

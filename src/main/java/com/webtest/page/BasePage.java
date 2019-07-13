@@ -1,6 +1,7 @@
 package com.webtest.page;
 
 import com.google.common.base.Function;
+import com.webtest.utils.ConfigParser;
 import com.webtest.utils.DriverProvider;
 import com.webtest.utils.PageWaits;
 import org.apache.log4j.Logger;
@@ -18,10 +19,13 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 
+/**
+ * @author anusha
+ */
 public class BasePage {
 
     protected static final Logger LOG = Logger.getLogger(BasePage.class);
-    protected String baseURL = "https://www.revolut.com/";
+    protected String baseURL;
     protected WebDriver driver;
 
     public enum Sections {PRICING, ACCOUNT, PRODUCT, COMPANY, HELP}
@@ -37,6 +41,7 @@ public class BasePage {
 
     public BasePage() {
         driver = DriverProvider.getDriver();
+        baseURL = ConfigParser.getConfig().getBase_url();
     }
 
     public void navigate() {
@@ -77,15 +82,11 @@ public class BasePage {
         int timer = 0;
         while (timer < timeOutSeconds && !driver.getCurrentUrl().contains(url)) {
             timer += 5;
-            try {
-                Thread.sleep(5);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            PageWaits.wait(PageWaits.DEFAULT_SMALL_WAIT);
         }
     }
 
-    protected void waitForPageLoad(long timeOutSeconds){
+    protected void waitForPageLoad(long timeOutSeconds) {
         new WebDriverWait(driver, timeOutSeconds).until(
                 webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
 
@@ -131,7 +132,7 @@ public class BasePage {
 //        }
 //    }
 
-    protected void switchHandles(Long timeOutSeconds) {
+     void switchHandles(Long timeOutSeconds) {
         LOG.info("Switching to the next tab on the browser...");
         Set<String> handles = driver.getWindowHandles();
         final Iterator iterator = handles.iterator();
@@ -143,7 +144,6 @@ public class BasePage {
         waitForPageLoad(timeOutSeconds);
         LOG.info("Switched to new tab with URL : " + driver.getCurrentUrl());
     }
-
 
 
     protected void waitUntilText(WebElement element, String text, long timeout) {

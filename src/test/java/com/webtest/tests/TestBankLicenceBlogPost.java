@@ -1,7 +1,10 @@
 package com.webtest.tests;
 
+import com.webtest.page.BasePage;
 import com.webtest.page.HelpPage;
+import com.webtest.page.KeyboardShortcutsPage;
 import com.webtest.utils.DriverProvider;
+import com.webtest.utils.PageWaits;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -13,18 +16,23 @@ import java.util.List;
 /**
  * @author anusha
  */
-public class TestHelpSection {
+public class TestBankLicenceBlogPost {
 
-    public final static Logger LOG = Logger.getLogger(TestHelpSection.class);
+    public final static Logger LOG = Logger.getLogger(TestBankLicenceBlogPost.class);
     WebDriver driver;
     HelpPage helpPage;
+    KeyboardShortcutsPage keyboardShortcuts;
 
-    @BeforeMethod
+    @BeforeClass
     private void init() {
         LOG.info("initializing test...");
         driver = DriverProvider.getDriver();
+
         helpPage = new HelpPage(driver);
+        keyboardShortcuts = new KeyboardShortcutsPage(driver);
+
         helpPage.navigate(HelpPage.HELP_SELECTION.COMMUNITY);
+
     }
 
     @Test
@@ -56,13 +64,8 @@ public class TestHelpSection {
 
     }
 
-    @AfterMethod
+    @AfterClass
     private void shutdown() {
-        if (driver != null) {
-            driver.manage().deleteAllCookies();
-            driver.close();
-            driver.quit();
-            driver = null;
-        }
+        DriverProvider.CloseAllOtherHandles();
     }
 }
