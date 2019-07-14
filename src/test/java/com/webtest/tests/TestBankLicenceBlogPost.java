@@ -1,14 +1,13 @@
 package com.webtest.tests;
 
-import com.webtest.page.BasePage;
 import com.webtest.page.HelpPage;
 import com.webtest.page.KeyboardShortcutsPage;
 import com.webtest.utils.DriverProvider;
-import com.webtest.utils.PageWaits;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +15,7 @@ import java.util.List;
 /**
  * @author anusha
  */
-public class TestBankLicenceBlogPost {
+public class TestBankLicenceBlogPost extends TestBase {
 
     public final static Logger LOG = Logger.getLogger(TestBankLicenceBlogPost.class);
     WebDriver driver;
@@ -61,11 +60,5 @@ public class TestBankLicenceBlogPost {
         for (String s : helpPage.getBlogPostHeading()) {
             Assert.assertTrue(s.contains(expected_headings.get(index++)), "Actual heading is : " + s);
         }
-
-    }
-
-    @AfterClass
-    private void shutdown() {
-        DriverProvider.CloseAllOtherHandles();
     }
 }

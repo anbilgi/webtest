@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * @author anusha
  */
-public class TestKeyboardShortcuts {
+public class TestKeyboardShortcuts extends TestBase {
 
     public final static Logger LOG = Logger.getLogger(TestKeyboardShortcuts.class);
     WebDriver driver;
@@ -65,9 +65,4 @@ public class TestKeyboardShortcuts {
         Assert.assertTrue(homepage_categories.contains("Bugs"));
     }
 
-
-    @AfterClass
-    private void shutdown() {
-        DriverProvider.CloseAllOtherHandles();
-    }
 }

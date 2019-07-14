@@ -78,12 +78,12 @@ public class BasePage {
 
     protected void waitForURL(String url, long timeOutSeconds) {
         waitForPageLoad(timeOutSeconds);
-
         int timer = 0;
-        while (timer < timeOutSeconds && !driver.getCurrentUrl().contains(url)) {
+        do {
             timer += 5;
             PageWaits.wait(PageWaits.DEFAULT_SMALL_WAIT);
-        }
+        } while (timer < timeOutSeconds && !driver.getCurrentUrl().contains(url));
+
     }
 
     protected void waitForPageLoad(long timeOutSeconds) {
@@ -132,7 +132,7 @@ public class BasePage {
 //        }
 //    }
 
-     void switchHandles(Long timeOutSeconds) {
+    void switchHandles(Long timeOutSeconds) {
         LOG.info("Switching to the next tab on the browser...");
         Set<String> handles = driver.getWindowHandles();
         final Iterator iterator = handles.iterator();
