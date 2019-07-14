@@ -22,6 +22,9 @@ public class TestBankLicenceBlogPost extends TestBase {
     HelpPage helpPage;
     KeyboardShortcutsPage keyboardShortcuts;
 
+    /**
+     * Init class to navigate to Help section
+     */
     @BeforeClass
     private void init() {
         LOG.info("initializing test...");
@@ -34,6 +37,11 @@ public class TestBankLicenceBlogPost extends TestBase {
 
     }
 
+    /**
+     * Test to verify 'We got a banking licence' blog post on community page
+     * Test searches for 'We got a banking licence' in the search bar, clicks on the first link
+     * Checks the test on the blog post
+     */
     @Test
     public void test_BankingLicenceBlogPost() {
         String search_term = "We got a banking licence  ";

@@ -30,14 +30,16 @@ public class KeyboardShortcutsPage extends BasePage {
 
     public static String home = "gh";
     public static String latest = "gl";
-    public static String categories = "gc";
     public static String Top = "gt";
-
     public static String hamburger = "=";
+
+    public static String back = "u";
+    public static String down = "j";
+    public static String up = "k";
 
 
     public void clickOnShortcut(String shortcut) {
-        LOG.info("Clicking on shortcut...");
+        LOG.info("Clicking on shortcut..."+ shortcut);
         driver.findElement(By.cssSelector("body")).sendKeys(shortcut);
         waitForPageLoad(PageWaits.DEFAULT_PAGE_LOADING_TIMEOUT);
         PageWaits.wait(PageWaits.DEFAULT_SMALL_WAIT);
@@ -75,4 +77,42 @@ public class KeyboardShortcutsPage extends BasePage {
         return links;
     }
 
+    //CSS for Hambuger menu
+    @FindBy(how = How.CSS, using = ".panel-body-contents")
+    private WebElement panel_popup;
+
+    @FindAll(value = {@FindBy(how = How.CSS, using = ".menu-container-general-links ul li a span")})
+    private List<WebElement> all_labels;
+
+    public List<String> verifyHamburgerLabels() {
+        waitForElement(panel_popup, PageWaits.DEFAULT_PAGE_LOADING_TIMEOUT);
+        List<String> labels = new ArrayList<>();
+        waitForPageLoad(PageWaits.DEFAULT_PAGE_LOADING_TIMEOUT);
+        waitForElements(all_labels, PageWaits.DEFAULT_PAGE_LOADING_TIMEOUT);
+        for (WebElement e : all_labels) {
+            labels.add(e.getText());
+        }
+        return labels;
+    }
+
+    //CSS for navigation
+    @FindAll(value = {@FindBy(how = How.CSS, using = ".latest-topic-list > .latest-topic-list-item a.title")})
+    private List<WebElement> all_topic_list;
+
+    @FindBy(how = How.XPATH, using = "//div[@class = 'latest-topic-list-item ember-view selected']//a[@class='title']")
+    private WebElement active_element;
+
+    public List<String> getListOfLatestPost() {
+        List<String> list_posts = new ArrayList<>();
+        waitForElements(all_topic_list, PageWaits.DEFAULT_WINDOW_APPEAR_TIMEOUT);
+        for (WebElement e : all_topic_list) {
+            list_posts.add(e.getText());
+        }
+        return list_posts;
+    }
+
+    public String getActiveElement() {
+        waitForElement(active_element, PageWaits.DEFAULT_WINDOW_APPEAR_TIMEOUT);
+        return active_element.getText();
+    }
 }

@@ -121,17 +121,6 @@ public class BasePage {
         });
     }
 
-//    protected void switchHandles() {
-//        LOG.info("Switching to the next tabs on the browser...");
-//        Set<String> handles = driver.getWindowHandles();
-//        String currentHandle = driver.getWindowHandle();
-//        for (String handle : handles) {
-//            if (!handle.equals(currentHandle)) {
-//                driver.switchTo().window(handle);
-//            }
-//        }
-//    }
-
     void switchHandles(Long timeOutSeconds) {
         LOG.info("Switching to the next tab on the browser...");
         Set<String> handles = driver.getWindowHandles();

@@ -24,16 +24,18 @@ public class TestChangeCountry extends TestBase {
         changeCountryPage.navigate();
     }
 
+    /**
+     * Test to change county on homepage to United states
+     */
     @Test
     public void test_changeCountryToUS() {
         LOG.info("Executing test_changeCountryToUS ");
         String new_country = "United States";
-        String us_heading_text = "Revolut is coming to\n" +
-                "the U.S.A";
+        String us_heading_text = "Revolut is coming to\n" + "the U.S.A";
 
         Assert.assertTrue(changeCountryPage.changeCountryTo(new_country));
         Assert.assertEquals(changeCountryPage.getNewCountry(), new_country);
-        Assert.assertTrue(changeCountryPage.getAllHeadings().contains(us_heading_text), "heading : \n " + changeCountryPage.getAllHeadings());
+        Assert.assertTrue(changeCountryPage.getAllHeadings().contains(us_heading_text), "headings : \n " + changeCountryPage.getAllHeadings());
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.revolut.com/en-US/");
     }
 
