@@ -18,7 +18,7 @@ Once the gecko driver is installed on your local machine, You need to provide th
 in the** **config.properties** file.
 
 ### Project Structure
-config.properties file has the path to geckodriver and URL to revolut homepage.
+config.properties file has the path to geckodriver and URL to Revolut homepage.
 And the testNG.xml is the suiteXmlFile to execute the test suite.
 
 ### Steps to run the test
@@ -30,4 +30,7 @@ Run the following command to execute the test suite from the root directory of t
 Test reports can be found in path : target/surefire-reports/emailable-report.html.
 
 Here's a sample emailable-report.html from the test suite run from my local machine.
-![Screenshot] (src/main/resources/emailable-report.png)
+
+<p>
+<img src ='src/main/resources/images/emailablereport.png' width='100%'>
+</p> 
