@@ -30,4 +30,4 @@ Run the following command to execute the test suite from the root directory of t
 Test reports can be found in path : target/surefire-reports/emailable-report.html.
 
 Here's a sample emailable-report.html from the test suite run from my local machine.
-![Screenshot] (emailable-report.png)
+![Screenshot] (src/main/resources/emailable-report.png)
